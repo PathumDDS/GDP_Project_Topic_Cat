@@ -1,0 +1,11 @@
+# Ignore Data Files (Keep them local only)
+data_weekly/
+keywords_weekly/
+logs_weekly/
+
+# Ignore Python Cache
+__pycache__/
+*.pyc
+
+# Ignore VS Code settings
+.vscode/
