@@ -1,7 +1,7 @@
 # script_weekly/fetch_categories.py
 # CATEGORY RESOLUTION VERSION
 # - Resolves Category IDs from Names in unprocessed.txt
-# - Maintains original window-stitching and file structure
+
 
 import os, time, random, traceback
 import pandas as pd
@@ -14,7 +14,7 @@ from pytrends.request import TrendReq
 
 GEO = "IN"
 
-# ----------------- Paths (Kept Same) -----------------
+# ----------------- Paths -----------------
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 KW_DIR = os.path.join(ROOT, "keywords_weekly")
 RAW_WINDOWS = os.path.join(ROOT, "data_weekly", "raw_windows", GEO)
@@ -90,7 +90,7 @@ def find_category_id(cat_tree, target_name):
             if result: return result
     return None
 
-# ----------------- Fetch Logic (Updated for Category Column Naming) -----------------
+# ----------------- Fetch Logic -----------------
 def fetch_window(pytrends, cat_id, start, end, original_name):
     start_adj = start - timedelta(days=(start.weekday() + 1) % 7) 
     end_adj = end + timedelta(days=(6 - end.weekday()) % 7)
@@ -117,7 +117,7 @@ def fetch_window(pytrends, cat_id, start, end, original_name):
                 elif "all" in df.columns:
                     df = df.rename(columns={"all": original_name})
                 
-                # If it's still not renamed (rare), rename by position (first column)
+                # If it's still not renamed, rename by position (first column)
                 if original_name not in df.columns and len(df.columns) > 0:
                     df.columns = [original_name]
                 
@@ -134,7 +134,7 @@ def fetch_window(pytrends, cat_id, start, end, original_name):
             
     return pd.DataFrame(index=full_idx, columns=[original_name]).fillna(0)
 
-# ----------------- Original Stitching Logic -----------------
+# ----------------- Stitching Logic -----------------
 def stitch_windows(windows_list, name):
     if not windows_list: return None
     stitched = windows_list[0][0].copy().sort_index()
@@ -204,7 +204,15 @@ def main():
         stitched.to_csv(os.path.join(RAW_WEEKLY, f"{safe_name}_weekly.csv"))
         save_status_move(cat_name, PROCED)
         log(f"SUCCESS: {cat_name}")
-        time.sleep(random.randint(60, 120))
+        # Check if more keywords exist before sleeping ---
+        remaining = read_lines(UNPRO)
+        if remaining:
+            # If there are items left, sleep 
+            time.sleep(random.randint(60, 120))
+        else:
+            # If empty, log and exit loop immediately
+            log("No more keywords pending. Stopping immediately.")
+            break
 
 if __name__ == "__main__":
     main()

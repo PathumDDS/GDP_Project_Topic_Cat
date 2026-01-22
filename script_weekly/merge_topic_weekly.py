@@ -1,11 +1,13 @@
 import os
 import pandas as pd
 
+GEO = "LK"
+
 # ----------------- Configuration -----------------
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 KW_DIR = os.path.join(ROOT, "keywords_weekly")
-RAW_WEEKLY_DIR = os.path.join(ROOT, "data_weekly", "raw_weekly")
-OUTPUT_DIR = os.path.join(ROOT, "data_weekly", "final_dataset")
+RAW_WEEKLY_DIR = os.path.join(ROOT, "data_weekly", "raw_weekly", GEO)
+OUTPUT_DIR = os.path.join(ROOT, "data_weekly", "weekly_merged_dataset")
 PROCESSED_FILE = os.path.join(KW_DIR, "processed.txt")
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -83,8 +85,8 @@ def main():
         print(f"\nMerging {len(df_list)} files...")
         final_df = pd.concat(df_list, axis=1, join='outer')
         final_df = final_df.sort_index()
-        
-        output_path = os.path.join(OUTPUT_DIR, "master_weekly_data.csv")
+
+        output_path = os.path.join(OUTPUT_DIR, "weekly_merged_data_" + GEO + ".csv")
         final_df.to_csv(output_path)
         
         print("-" * 30)
