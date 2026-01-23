@@ -12,7 +12,7 @@ from datetime import datetime, timedelta, timezone
 from dateutil.relativedelta import relativedelta
 from pytrends.request import TrendReq
 
-GEO = "IN"
+GEO = "LK"
 
 # ----------------- Paths (Kept Same) -----------------
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
