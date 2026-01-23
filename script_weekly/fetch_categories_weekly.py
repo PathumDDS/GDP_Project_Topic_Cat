@@ -203,7 +203,15 @@ def main():
         stitched.to_csv(os.path.join(RAW_WEEKLY, f"{safe_name}_weekly.csv"))
         save_status_move(cat_name, PROCED)
         log(f"SUCCESS: {cat_name}")
-        time.sleep(random.randint(60, 120))
+        # Check if more keywords exist before sleeping ---
+        remaining = read_lines(UNPRO)
+        if remaining:
+            # If there are items left, sleep 
+            time.sleep(random.randint(60, 120))
+        else:
+            # If empty, log and exit loop immediately
+            log("No more keywords pending. Stopping immediately.")
+            break
 
 if __name__ == "__main__":
     main()
