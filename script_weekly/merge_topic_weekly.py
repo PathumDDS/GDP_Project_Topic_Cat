@@ -6,7 +6,7 @@ GEO = "LK"
 # ----------------- Configuration -----------------
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 KW_DIR = os.path.join(ROOT, "keywords_weekly")
-RAW_WEEKLY_DIR = os.path.join(ROOT, "data_weekly", "raw_weekly", GEO)
+RAW_WEEKLY_DIR = os.path.join(ROOT, "data_weekly", "raw_weekly")
 OUTPUT_DIR = os.path.join(ROOT, "data_weekly", "weekly_merged_dataset")
 PROCESSED_FILE = os.path.join(KW_DIR, "processed.txt")
 
