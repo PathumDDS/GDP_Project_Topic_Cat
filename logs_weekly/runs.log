@@ -1,3 +1,12 @@
 2026-01-23 10:28:39 UTC - --- RESOLVING CATEGORY ID: Job Listings ---
 2026-01-23 10:28:40 UTC - Resolved Job Listings to ID: 960
 2026-01-23 10:30:31 UTC - SUCCESS: Job Listings
+2026-01-23 10:37:44 UTC - --- RESOLVING CATEGORY ID: Jobs ---
+2026-01-23 10:37:45 UTC - Resolved Jobs to ID: 60
+2026-01-23 10:39:08 UTC - SUCCESS: Jobs
+2026-01-23 10:39:08 UTC - No more keywords pending. Stopping immediately.
+2026-01-23 10:40:22 UTC - --- RESOLVING CATEGORY ID: Legal Services ---
+2026-01-23 10:40:23 UTC - Resolved Legal Services to ID: 969
+2026-01-23 10:41:46 UTC - Fetch Error: The request failed: Google returned a response with code 429
+2026-01-23 10:43:22 UTC - SUCCESS: Legal Services
+2026-01-23 10:43:22 UTC - No more keywords pending. Stopping immediately.
