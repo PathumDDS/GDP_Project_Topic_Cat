@@ -1,6 +1,5 @@
 # Ignore Data Files (Keep them local only)
-data_weekly/
-logs_weekly/
+
 
 # Ignore Python Cache
 __pycache__/

@@ -12,13 +12,11 @@ from datetime import datetime, timedelta, timezone
 from dateutil.relativedelta import relativedelta
 from pytrends.request import TrendReq
 
-GEO = "IN"
-
 # ----------------- Paths -----------------
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 KW_DIR = os.path.join(ROOT, "keywords_weekly")
-RAW_WINDOWS = os.path.join(ROOT, "data_weekly", "raw_windows", GEO)
-RAW_WEEKLY = os.path.join(ROOT, "data_weekly", "raw_weekly", GEO)
+RAW_WINDOWS = os.path.join(ROOT, "data_weekly", "raw_windows")
+RAW_WEEKLY = os.path.join(ROOT, "data_weekly", "raw_weekly")
 LOGS = os.path.join(ROOT, "logs_weekly")
 
 os.makedirs(LOGS, exist_ok=True)
@@ -31,7 +29,7 @@ PROCED = os.path.join(KW_DIR, "processed.txt")
 FAILED = os.path.join(KW_DIR, "failed.txt")
 RUN_LOG = os.path.join(LOGS, "runs.log")
 
-
+GEO = "IN"
 TZ = 330
 START_DATE = datetime(2015, 1, 1)
 WINDOW_YEARS = 5
