@@ -5,7 +5,7 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
 # --- CONFIGURATION ---
-INPUT_FILE = "data_weekly/final_dataset_ready.csv"
+INPUT_FILE = "data_weekly/gdp_merged_data.csv"
 TARGET_COL = "GDP_Growth"
 
 def determine_components():

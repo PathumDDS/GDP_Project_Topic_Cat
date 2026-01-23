@@ -7,8 +7,8 @@ from sklearn.decomposition import PCA
 
 # --- CONFIGURATION ---
 MODEL_FILE = "data_weekly/srilanka_gdp_model.pkl"
-WEEKLY_DATA_FILE = "data_weekly/master_data_weekly.csv"  # Raw Weekly Keywords
-ORIGINAL_DATA_FILE = "data_weekly/final_dataset_ready.csv" # Used to recover PCA map
+WEEKLY_DATA_FILE = "data_weekly/weekly_preprocessed.csv"  # Raw Weekly Keywords
+ORIGINAL_DATA_FILE = "data_weekly/gdp_merged_data.csv" # Used to recover PCA map
 GDP_FILE = "data_weekly/gdp_sri_lanka.csv" # Actual GDP for plotting
 
 def recover_pca_map():

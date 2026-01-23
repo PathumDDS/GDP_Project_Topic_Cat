@@ -84,7 +84,7 @@ def main():
         final_df = pd.concat(df_list, axis=1, join='outer')
         final_df = final_df.sort_index()
         
-        output_path = os.path.join(OUTPUT_DIR, "master_weekly_data.csv")
+        output_path = os.path.join(OUTPUT_DIR, "weekly_merged_data.csv")
         final_df.to_csv(output_path)
         
         print("-" * 30)

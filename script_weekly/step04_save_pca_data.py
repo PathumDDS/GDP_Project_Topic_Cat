@@ -4,7 +4,7 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
 # --- CONFIGURATION ---
-INPUT_FILE = "data_weekly/final_dataset_ready.csv"
+INPUT_FILE = "data_weekly/gdp_merged_data.csv"
 OUTPUT_FILE = "data_weekly/pca_dataset_final.csv"
 TARGET_COL = "GDP_Growth"
 N_COMPONENTS = 3  # Keeping top 3 is standard safety, even if #1 is dominant

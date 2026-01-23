@@ -8,9 +8,9 @@ from sklearn.preprocessing import StandardScaler
 
 # --- CONFIGURATION ---
 # Update this filename to match your current combined dataset
-INPUT_FILE = "data_weekly/final_dataset/master_weekly_data.csv"  
-OUTPUT_FILE_WEEKLY = "data_weekly/master_data_weekly.csv"
-OUTPUT_FILE = "data_weekly/master_data.csv"
+INPUT_FILE = "data_weekly/final_dataset/weekly_merged_data.csv"  
+OUTPUT_FILE_WEEKLY = "data_weekly/weekly_preprocessed_data.csv"
+OUTPUT_FILE = "data_weekly/preprocessed_data.csv"
 CUTOFF_DATE = "2025-09-30"
 
 # Strict threshold for "Empty" (NaN) data

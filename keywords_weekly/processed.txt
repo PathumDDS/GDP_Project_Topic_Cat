@@ -89,7 +89,7 @@ Insurance
 Internet & Telecom
 Investing
 Job Listings
-Job
+Jobs
 Legal Services
 Luggage & Travel Accessories
 Luxury Goods
@@ -153,7 +153,7 @@ House moving
 House price index
 Interest
 Investment
-Jobs
+Job
 Job search
 Judicial Liquidation
 Loan
@@ -168,4 +168,4 @@ Temporary jobs
 Unemployment
 Unemployment benefits
 Recession
-Recruitment
+Recruitmentjobs
