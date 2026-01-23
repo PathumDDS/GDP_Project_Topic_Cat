@@ -4,7 +4,7 @@ import os
 # --- CONFIGURATION ---
 TRENDS_FILE = "data_weekly/master_data.csv"   # Already Quarterly
 GDP_FILE = "data_weekly/gdp_sri_lanka.csv"    # Target Variable
-OUTPUT_FILE = "data_weekly/final_dataset_ready.csv"
+OUTPUT_FILE = "data_weekly/gdp_merged_data.csv"
 
 def load_and_merge():
     print("--- STEP 1: Loading Data ---")

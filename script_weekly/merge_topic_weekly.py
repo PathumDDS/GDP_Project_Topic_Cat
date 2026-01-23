@@ -1,8 +1,6 @@
 import os
 import pandas as pd
 
-GEO = "LK"
-
 # ----------------- Configuration -----------------
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 KW_DIR = os.path.join(ROOT, "keywords_weekly")
