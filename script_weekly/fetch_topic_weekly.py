@@ -206,7 +206,15 @@ def main():
             save_status_move(keyword, PROCED)
             log(f"SUCCESS: {keyword}")
 
-        time.sleep(random.randint(60, 120))
+        # Check if more keywords exist before sleeping ---
+        remaining = read_lines(UNPRO)
+        if remaining:
+            # If there are items left, sleep 
+            time.sleep(random.randint(60, 120))
+        else:
+            # If empty, log and exit loop immediately
+            log("No more keywords pending. Stopping immediately.")
+            break
 
 if __name__ == "__main__":
     main()
