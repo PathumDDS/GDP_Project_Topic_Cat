@@ -3,7 +3,7 @@ import os
 
 # --- CONFIGURATION ---
 TRENDS_FILE = "data_weekly/preprocessed_data.csv"   # Already Quarterly
-GDP_FILE = "data_weekly/gdp_sri_lanka.csv"    # Target Variable
+GDP_FILE = "data_weekly/gdp_india.csv"    # Target Variable
 OUTPUT_FILE = "data_weekly/gdp_merged_data.csv"
 
 def load_and_merge():
