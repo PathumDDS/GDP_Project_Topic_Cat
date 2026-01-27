@@ -2,8 +2,8 @@ import pandas as pd
 import os
 
 # --- CONFIGURATION ---
-TRENDS_FILE = "data_weekly/preprocessed_data.csv"   # Already Quarterly
-GDP_FILE = "data_weekly/gdp_sri_lanka.csv"    # Target Variable
+TRENDS_FILE = "data_weekly/preprocessed_data.csv"
+GDP_FILE = "data_weekly/gdp_sri_lanka.csv"
 OUTPUT_FILE = "data_weekly/gdp_merged_data.csv"
 
 def load_and_merge():
