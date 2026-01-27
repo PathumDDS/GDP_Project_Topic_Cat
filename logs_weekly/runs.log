@@ -980,3 +980,9 @@
 2026-01-23 09:02:36 UTC - Fetch Error: The request failed: Google returned a response with code 429
 2026-01-23 09:05:50 UTC - Fetch Error: The request failed: Google returned a response with code 429
 2026-01-23 09:07:30 UTC - SUCCESS: jobs
+2026-01-27 15:40:27 UTC - --- RESOLVING TOPIC: House moving ---
+2026-01-27 15:40:28 UTC - Found MID: /g/11j8qrmlgh for House moving
+2026-01-27 15:42:08 UTC - SUCCESS: House moving
+2026-01-27 15:43:41 UTC - --- RESOLVING TOPIC: Judicial Liquidation ---
+2026-01-27 15:43:42 UTC - Found MID: /g/11bwpqb43h for Judicial Liquidation
+2026-01-27 15:45:40 UTC - SUCCESS: Judicial Liquidation

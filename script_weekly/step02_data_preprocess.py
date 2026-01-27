@@ -7,7 +7,6 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
 # --- CONFIGURATION ---
-# Update this filename to match your current combined dataset
 INPUT_FILE = "data_weekly/final_dataset/weekly_merged_data.csv"  
 OUTPUT_FILE_WEEKLY = "data_weekly/weekly_preprocessed_data.csv"
 OUTPUT_FILE = "data_weekly/preprocessed_data.csv"
@@ -45,7 +44,7 @@ def handle_empty_values(df, threshold=0.05):
     else:
         print("-> No variables exceeded the failure threshold.")
 
-    # 4. SOLVE PART B: Handle the survivors
+    # 4. SOLVE PART B
     # If a variable has only a few missing spots (e.g. 1%), we assume 
     # the missing data implies "Low Volume" -> 0.
     remaining_nans = df.isna().sum().sum()
@@ -61,14 +60,14 @@ def apply_log_transformation(df):
     PHASE 2: Log Transformation
     Formula: y = ln(x + 1)
     
-    Purpose: Stabilizes variance so huge spikes don't drown out 
+    Stabilizes variance so huge spikes don't drown out 
     small economic signals.
     """
     print(f"\n--- Phase 2: Log Transformation (y = ln(x + 1)) ---")
     
     # 1. Apply the formula
     # np.log1p(x) is a specific numpy function that calculates ln(x + 1)
-    # It is more accurate for small numbers than np.log(x + 1)
+
     df_log = np.log1p(df)
     
     # 2. Verification Report
@@ -180,7 +179,7 @@ def convert_to_quarterly(df):
     print(f"Original Weekly Rows: {len(df)}")
     print(f"New Quarterly Rows:   {len(df_quarterly)}")
     
-    # Quick sanity check: 10 years should be approx 40 quarters
+    # Quick check: 10 years should be approx 40 quarters
     return df_quarterly
 
 def main():
@@ -192,7 +191,7 @@ def main():
     print(f"--- Loading Data from {INPUT_FILE} ---")
     df = pd.read_csv(INPUT_FILE, index_col=0)
 
-    # 2. Ensure the Index is actually a Date (Crucial)
+    # 2. Ensure the Index is actually a Date
     # This fixes any issues where dates are read as strings
     df.index = pd.to_datetime(df.index)
     df = df.sort_index()
@@ -222,11 +221,9 @@ def main():
     df = handle_empty_values(df, threshold=NAN_THRESHOLD)
 
     # --- PHASE 2: LOG TRANSFORMATION ---
-    # We call the new function here
     df = apply_log_transformation(df)
 
-    # --- PHASE 3: COMMON TREND REMOVAL (NEW) ---
-    # This calls the function we just added
+    # --- PHASE 3: COMMON TREND REMOVAL ---
     df = remove_common_trend_oecd(df)
 
     # --- PHASE 4: YoY GROWTH (NEW) ---
@@ -238,7 +235,7 @@ def main():
 
     # 5. Save the Cleaned File
     df.to_csv(OUTPUT_FILE)
-    print(f"Success! Aligned data saved to: {OUTPUT_FILE}")
+    print(f"Success! data saved to: {OUTPUT_FILE}")
 
 if __name__ == "__main__":
     main()
