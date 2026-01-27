@@ -11,8 +11,6 @@ PROCESSED_FILE = os.path.join(KW_DIR, "processed.txt")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # ----------------- Helper -----------------
-# We need this to convert "social security" in the text file 
-# to "social_security" (the filename)
 def sanitize_for_filename(name):
     s = "".join(c if c.isalnum() or c in (" ", "_") else "_" for c in name)
     s = s.strip().replace(" ", "_")
@@ -88,7 +86,7 @@ def main():
         final_df.to_csv(output_path)
         
         print("-" * 30)
-        print(f"✅ Success! Master Dataset Created.")
+        print(f"✅ Success! Dataset Created.")
         print(f"Location: {output_path}")
         print(f"Dimensions: {final_df.shape} (Rows=Weeks, Cols=Variables)")
         print("-" * 30)
