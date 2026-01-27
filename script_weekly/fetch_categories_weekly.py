@@ -1,7 +1,5 @@
 # script_weekly/fetch_categories.py
-# CATEGORY RESOLUTION VERSION
 # - Resolves Category IDs from Names in unprocessed.txt
-# - Maintains original window-stitching and file structure
 
 import os, time, random, traceback
 import pandas as pd
@@ -13,7 +11,7 @@ from dateutil.relativedelta import relativedelta
 from pytrends.request import TrendReq
 
 
-# ----------------- Paths (Kept Same) -----------------
+# ----------------- Paths -----------------
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 KW_DIR = os.path.join(ROOT, "keywords_weekly")
 RAW_WINDOWS = os.path.join(ROOT, "data_weekly", "raw_windows")
@@ -89,7 +87,7 @@ def find_category_id(cat_tree, target_name):
             if result: return result
     return None
 
-# ----------------- Fetch Logic (Updated for Category Column Naming) -----------------
+# ----------------- Fetch Logic -----------------
 def fetch_window(pytrends, cat_id, start, end, original_name):
     start_adj = start - timedelta(days=(start.weekday() + 1) % 7) 
     end_adj = end + timedelta(days=(6 - end.weekday()) % 7)
@@ -116,7 +114,7 @@ def fetch_window(pytrends, cat_id, start, end, original_name):
                 elif "all" in df.columns:
                     df = df.rename(columns={"all": original_name})
                 
-                # If it's still not renamed (rare), rename by position (first column)
+                # If it's still not renamed, rename by position (first column)
                 if original_name not in df.columns and len(df.columns) > 0:
                     df.columns = [original_name]
                 
@@ -178,7 +176,7 @@ def main():
         if FIXED_END_DATE:
             now = datetime.strptime(FIXED_END_DATE, "%Y-%m-%d")
         else:
-            # Your original auto-calculation logic
+            # original auto-calculation logic
             today = datetime.now(timezone.utc).replace(tzinfo=None)
             now = (today.replace(day=1) - timedelta(days=1)) - timedelta(days=((today.replace(day=1) - timedelta(days=1)).weekday() - 6) % 7)
         

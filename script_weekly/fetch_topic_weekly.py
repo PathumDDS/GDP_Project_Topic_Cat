@@ -1,7 +1,6 @@
 # script_weekly/fetch_weekly.py
 # TOPIC SUGGESTION VERSION
 # - Automatically resolves Topic IDs from strings
-# - Maintains original window-stitching and file structure
 
 import os, time, random, traceback
 import pandas as pd
