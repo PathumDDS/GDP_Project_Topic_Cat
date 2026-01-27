@@ -6,7 +6,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 
 # --- CONFIGURATION ---
-MODEL_FILE = "data_weekly/srilanka_gdp_model.pkl"
+MODEL_FILE = "data_weekly/india_gdp_model.pkl"
 WEEKLY_DATA_FILE = "data_weekly/final_dataset/weekly_merged_data.csv"  # Raw Weekly Keywords
 ORIGINAL_DATA_FILE = "data_weekly/gdp_merged_data.csv" # Used to recover PCA map
 GDP_FILE = "data_weekly/gdp_india.csv" # Actual GDP for plotting

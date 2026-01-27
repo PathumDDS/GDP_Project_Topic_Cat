@@ -13,7 +13,7 @@ LAG = 1  # 3 Months
 
 # --- CONFIGURATION ---
 # The file used to creating the PCA originally (Source of Truth)
-ORIGINAL_PCA_INPUT = "data_weekly/final_dataset_ready.csv" 
+ORIGINAL_PCA_INPUT = "data_weekly/gdp_merged_data.csv" 
 # The Raw Weekly Data you want to predict on (2015-2025)
 WEEKLY_TARGET_FILE = "data_weekly/weekly_preprocessed.csv"
 # The GDP file for plotting
@@ -70,8 +70,8 @@ def train_and_evaluate_clean(output_name):
     print(f"R2:   {r2:.4f}")
 
     # 5. Save to disk
-    joblib.dump(model, 'data_weekly/srilanka_gdp_model.pkl')
-    print("Model saved to: data_weekly/srilanka_gdp_model.pkl")
+    joblib.dump(model, 'data_weekly/india_gdp_model.pkl')
+    print("Model saved to: data_weekly/india_gdp_model.pkl")
     print(f"Coefficients: {model.coef_}")
     
     # 6. Plot
