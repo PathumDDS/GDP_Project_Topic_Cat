@@ -70,8 +70,8 @@ def train_and_evaluate_clean(output_name):
     print(f"R2:   {r2:.4f}")
 
     # 5. Save to disk
-    joblib.dump(model, 'data_weekly/srilanka_gdp_model.pkl')
-    print("Model saved to: data_weekly/srilanka_gdp_model.pkl")
+    joblib.dump(model, 'data_weekly/india_gdp_model.pkl')
+    print("Model saved to: data_weekly/india_gdp_model.pkl")
     print(f"Coefficients: {model.coef_}")
     
     # 6. Plot
