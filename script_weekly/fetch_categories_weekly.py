@@ -1,5 +1,4 @@
 # script_weekly/fetch_categories.py
-# CATEGORY RESOLUTION VERSION
 # - Resolves Category IDs from Names in unprocessed.txt
 
 
@@ -177,7 +176,7 @@ def main():
         if FIXED_END_DATE:
             now = datetime.strptime(FIXED_END_DATE, "%Y-%m-%d")
         else:
-            # Your original auto-calculation logic
+            # original auto-calculation logic
             today = datetime.now(timezone.utc).replace(tzinfo=None)
             now = (today.replace(day=1) - timedelta(days=1)) - timedelta(days=((today.replace(day=1) - timedelta(days=1)).weekday() - 6) % 7)
         

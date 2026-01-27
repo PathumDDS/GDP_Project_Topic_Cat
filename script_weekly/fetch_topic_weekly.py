@@ -12,7 +12,7 @@ from datetime import datetime, timedelta, timezone
 from dateutil.relativedelta import relativedelta
 from pytrends.request import TrendReq
 
-# ----------------- Paths (Kept Same) -----------------
+# ----------------- Paths -----------------
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 KW_DIR = os.path.join(ROOT, "keywords_weekly")
 RAW_WINDOWS = os.path.join(ROOT, "data_weekly", "raw_windows")
