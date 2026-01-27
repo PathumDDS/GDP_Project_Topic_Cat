@@ -230,7 +230,7 @@ def main():
     df = calculate_yoy_growth(df)
     df.to_csv(OUTPUT_FILE_WEEKLY)
 
-    # --- PHASE 5: CONVERT TO QUARTERLY (NEW) ---
+    # --- PHASE 5: CONVERT TO QUARTERLY ---
     df = convert_to_quarterly(df)
 
     # 5. Save the Cleaned File
