@@ -2,7 +2,7 @@ import pandas as pd
 import os
 
 # --- CONFIGURATION ---
-TRENDS_FILE = "data_weekly/master_data.csv"   # Already Quarterly
+TRENDS_FILE = "data_weekly/preprocessed_data.csv"   # Already Quarterly
 GDP_FILE = "data_weekly/gdp_sri_lanka.csv"    # Target Variable
 OUTPUT_FILE = "data_weekly/gdp_merged_data.csv"
 
