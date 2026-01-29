@@ -7,8 +7,7 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
 # --- CONFIGURATION ---
-# Update this filename to match your current combined dataset
-INPUT_FILE = "data_weekly/final_dataset/master_weekly_data.csv"  
+INPUT_FILE = "data_weekly/final_dataset/weekly_merged_data.csv"  
 OUTPUT_FILE_WEEKLY = "data_weekly/weekly_preprocessed.csv"
 OUTPUT_FILE = "data_weekly/preprocessed_data.csv"
 CUTOFF_DATE = "2025-09-30"
@@ -34,7 +33,7 @@ def handle_empty_values(df, threshold=0.05):
     
     print(f"Total Variables: {len(df.columns)}")
     
-    # 2. REPORT: Show us the problematic ones
+    # 2. Show us the problematic ones
     if len(bad_vars) > 0:
         print(f"\n[CRITICAL] Found {len(bad_vars)} broken variables (> {threshold*100}% Empty):")
         print(bad_vars.sort_values(ascending=False).head(10))
@@ -81,8 +80,7 @@ def apply_log_transformation(df):
 
 def remove_common_trend_oecd(df_log):
     """
-    PHASE 3: Anchoring / Common Trend Removal
-    Based on Woloszko (2020).
+    PHASE 3: Common Trend Removal.
     
     1. Extract the smooth trend of each variable using HP Filter.
     2. Run PCA on these trends to find the 'Common Trend' (PC1).
@@ -218,15 +216,12 @@ def main():
     print("-" * 30)
 
     # --- STEP 2: EMPTY VALUE HANDLING ---
-    # We call our new function here
     df = handle_empty_values(df, threshold=NAN_THRESHOLD)
 
     # --- PHASE 2: LOG TRANSFORMATION ---
-    # We call the new function here
     df = apply_log_transformation(df)
 
     # --- PHASE 3: COMMON TREND REMOVAL (NEW) ---
-    # This calls the function we just added
     df = remove_common_trend_oecd(df)
 
     # --- PHASE 4: YoY GROWTH (NEW) ---
@@ -238,7 +233,7 @@ def main():
 
     # 5. Save the Cleaned File
     df.to_csv(OUTPUT_FILE)
-    print(f"Success! Aligned data saved to: {OUTPUT_FILE}")
+    print(f"Success! data saved to: {OUTPUT_FILE}")
 
 if __name__ == "__main__":
     main()

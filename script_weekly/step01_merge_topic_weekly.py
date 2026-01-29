@@ -88,7 +88,7 @@ def main():
         final_df.to_csv(output_path)
         
         print("-" * 30)
-        print(f"✅ Success! Master Dataset Created.")
+        print(f"✅ Success! Dataset Created.")
         print(f"Location: {output_path}")
         print(f"Dimensions: {final_df.shape} (Rows=Weeks, Cols=Variables)")
         print("-" * 30)

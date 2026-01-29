@@ -21,14 +21,14 @@ def save_pca_data():
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
     
-    # 3. Transform (Squash 160 -> 3)
+    # 3. Transform
     pca = PCA(n_components=N_COMPONENTS)
     X_pca = pca.fit_transform(X_scaled)
     
     # 4. Create New Dataframe
     cols = [f"PC{i+1}" for i in range(N_COMPONENTS)]
     df_pca = pd.DataFrame(X_pca, columns=cols, index=df.index)
-    df_pca[TARGET_COL] = y  # Add GDP back
+    df_pca[TARGET_COL] = y 
     
     # 5. Save
     df_pca.to_csv(OUTPUT_FILE)

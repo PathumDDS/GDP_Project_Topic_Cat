@@ -5,7 +5,7 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
 # --- CONFIGURATION ---
-INPUT_FILE = "data_weekly/final_dataset_ready.csv"
+INPUT_FILE = "data_weekly/gdp_merged_data.csv"
 TARGET_COL = "GDP_Growth"
 
 def determine_components():
@@ -15,18 +15,16 @@ def determine_components():
     df = pd.read_csv(INPUT_FILE, index_col=0, parse_dates=True)
     X = df.drop(columns=[TARGET_COL])
     
-    # 2. Standardize (Mandatory for PCA)
+    # 2. Standardize
     # This makes sure 'Loan' (Scale 0-100) and 'Interest' (Scale 0-10) are treated equally.
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
     
     # 3. Run Full PCA
-    # We don't set a limit. We ask: "If we keep everything, how important is each piece?"
     pca = PCA()
     pca.fit(X_scaled)
     
     # 4. Calculate Cumulative Variance
-    # This tells us: "Component 1 explains 20%, Comp 1+2 explains 35%..."
     cumulative_variance = np.cumsum(pca.explained_variance_ratio_)
     
     # 5. Print Key Milestones
