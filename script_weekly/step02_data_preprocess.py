@@ -7,8 +7,7 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
 # --- CONFIGURATION ---
-# Update this filename to match your current combined dataset
-INPUT_FILE = "data_weekly/final_dataset/master_weekly_data.csv"  
+INPUT_FILE = "data_weekly/final_dataset/weekly_merged_data.csv"  
 OUTPUT_FILE_WEEKLY = "data_weekly/weekly_preprocessed.csv"
 OUTPUT_FILE = "data_weekly/preprocessed_data.csv"
 CUTOFF_DATE = "2025-09-30"
@@ -34,7 +33,7 @@ def handle_empty_values(df, threshold=0.05):
     
     print(f"Total Variables: {len(df.columns)}")
     
-    # 2. REPORT: Show us the problematic ones
+    # 2. Show us the problematic ones
     if len(bad_vars) > 0:
         print(f"\n[CRITICAL] Found {len(bad_vars)} broken variables (> {threshold*100}% Empty):")
         print(bad_vars.sort_values(ascending=False).head(10))
@@ -180,7 +179,6 @@ def convert_to_quarterly(df):
     print(f"Original Weekly Rows: {len(df)}")
     print(f"New Quarterly Rows:   {len(df_quarterly)}")
     
-    # Quick sanity check: 10 years should be approx 40 quarters
     return df_quarterly
 
 def main():
@@ -192,7 +190,7 @@ def main():
     print(f"--- Loading Data from {INPUT_FILE} ---")
     df = pd.read_csv(INPUT_FILE, index_col=0)
 
-    # 2. Ensure the Index is actually a Date (Crucial)
+    # 2. Ensure the Index is actually a Date 
     # This fixes any issues where dates are read as strings
     df.index = pd.to_datetime(df.index)
     df = df.sort_index()
@@ -218,15 +216,12 @@ def main():
     print("-" * 30)
 
     # --- STEP 2: EMPTY VALUE HANDLING ---
-    # We call our new function here
     df = handle_empty_values(df, threshold=NAN_THRESHOLD)
 
     # --- PHASE 2: LOG TRANSFORMATION ---
-    # We call the new function here
     df = apply_log_transformation(df)
 
-    # --- PHASE 3: COMMON TREND REMOVAL (NEW) ---
-    # This calls the function we just added
+    # --- PHASE 3: COMMON TREND REMOVAL ---
     df = remove_common_trend_oecd(df)
 
     # --- PHASE 4: YoY GROWTH (NEW) ---

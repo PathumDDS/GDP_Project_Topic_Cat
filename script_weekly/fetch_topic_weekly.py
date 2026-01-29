@@ -1,5 +1,4 @@
-# script_weekly/fetch_weekly.py
-# TOPIC SUGGESTION VERSION
+# script_weekly/fetch_topic_weekly.py
 # - Automatically resolves Topic IDs from strings
 # - Maintains original window-stitching and file structure
 

@@ -16,17 +16,14 @@ def determine_components():
     X = df.drop(columns=[TARGET_COL])
     
     # 2. Standardize (Mandatory for PCA)
-    # This makes sure 'Loan' (Scale 0-100) and 'Interest' (Scale 0-10) are treated equally.
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
     
     # 3. Run Full PCA
-    # We don't set a limit. We ask: "If we keep everything, how important is each piece?"
     pca = PCA()
     pca.fit(X_scaled)
     
     # 4. Calculate Cumulative Variance
-    # This tells us: "Component 1 explains 20%, Comp 1+2 explains 35%..."
     cumulative_variance = np.cumsum(pca.explained_variance_ratio_)
     
     # 5. Print Key Milestones
