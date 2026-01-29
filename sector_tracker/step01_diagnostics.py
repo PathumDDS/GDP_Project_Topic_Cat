@@ -51,7 +51,7 @@ def run_diagnostics():
     plt.ylabel("Variance Explained")
     plt.grid(True)
     plt.legend()
-    plt.savefig("data_weekly/step1_scree_plot.png")
+    plt.savefig("data_weekly/pca_scree_plot.png")
     print("Graph saved: data_weekly/step1_scree_plot.png")
 
     # 3. Lag Analysis (Cross-Correlation)

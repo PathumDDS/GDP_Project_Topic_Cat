@@ -11,7 +11,7 @@ from sklearn.metrics import mean_squared_error
 INPUT_FILE = "data_weekly/gdp_merged_data.csv"
 TARGET_COL = "GDP_Growth"
 
-# The "Refined" Drop List (Noise Filter)
+# The "Refined" Drop List 
 DROP_COLS = [
     "Hobbies___Leisure", "Arts___Entertainment", "Games", 
     "Entertainment_Media", "Entertainment_Industry", 
@@ -100,7 +100,7 @@ def run_model_tournament():
     print(f">> RECOMMENDATION: Use {winner}")
 
     # Optional: Visualization of the comparison
-    names = [x[0].split()[0] for x in sorted_results] # Short names
+    names = [x[0].split()[0] for x in sorted_results] 
     scores = [x[1] for x in sorted_results]
     
     plt.figure(figsize=(8, 4))
@@ -110,8 +110,9 @@ def run_model_tournament():
     plt.ylim(0, max(scores) * 1.1)
     for i, v in enumerate(scores):
         plt.text(i, v + 0.1, f"{v:.2f}", ha='center')
-    plt.savefig("data_weekly/model_comparison.png")
-    print("Comparison chart saved to data_weekly/model_comparison.png")
+
+    # plt.savefig("data_weekly/model_comparison_tournament.png")
+    # print(">> Saved: data_weekly/model_comparison_tournament.png")
 
 if __name__ == "__main__":
     run_model_tournament()

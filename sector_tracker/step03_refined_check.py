@@ -8,7 +8,6 @@ from sklearn.preprocessing import StandardScaler
 INPUT_FILE = "data_weekly/gdp_merged_data.csv"
 TARGET_COL = "GDP_Growth"
 
-# !!! CRITICAL UPDATE: COLUMNS TO REMOVE !!!
 # We remove broad "Leisure" categories to force focus on "Services"
 DROP_COLS = [
     "Hobbies___Leisure", 
@@ -44,7 +43,7 @@ def run_refined_diagnostics():
     print(f"Remaining Categories: {X_refined.shape[1]}")
     print("-" * 30)
 
-    # 3. PCA Analysis (Refined)
+    # 3. PCA Analysis
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X_refined)
     
@@ -57,19 +56,19 @@ def run_refined_diagnostics():
     print(f"PC1 Variance: {var_ratio[0]:.2%} (Cumulative: {cum_var[0]:.2%})")
     print(f"PC2 Variance: {var_ratio[1]:.2%} (Cumulative: {cum_var[1]:.2%})")
 
-    # 4. Lag Analysis (Refined PC1 vs GDP)
-    pc1 = pca.transform(X_scaled)[:, 1]
+    # 4. Lag Analysis (Refined PC2 vs GDP)
+    pc2 = pca.transform(X_scaled)[:, 1]
     
-    print("\n--- LAG ANALYSIS (Refined PC1 vs GDP) ---")
+    print("\n--- LAG ANALYSIS (Refined PC2 vs GDP) ---")
     correlations = []
     lags = [0, 1, 2, 3]
     
     for lag in lags:
-        temp_df = pd.DataFrame({'PC1': pc1, 'GDP': y.values}, index=df.index)
-        temp_df['PC1_Shifted'] = temp_df['PC1'].shift(lag)
+        temp_df = pd.DataFrame({'PC2': pc2, 'GDP': y.values}, index=df.index)
+        temp_df['PC2_Shifted'] = temp_df['PC2'].shift(lag)
         valid_data = temp_df.dropna()
         
-        corr = valid_data['PC1_Shifted'].corr(valid_data['GDP'])
+        corr = valid_data['PC2_Shifted'].corr(valid_data['GDP'])
         correlations.append(corr)
         print(f"Lag {lag}: Correlation = {corr:.4f}")
         

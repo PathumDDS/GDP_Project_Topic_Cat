@@ -60,7 +60,7 @@ def run_final_analysis():
     plt.savefig("data_weekly/final_scree_plot.png")
     print(">> Saved: data_weekly/final_scree_plot.png")
 
-    # --- STEP 3: FIND BEST MODEL (Tournament) ---
+    # --- STEP 3: FIND BEST MODEL ---
     print("\n--- STEP 3: RUNNING MODEL TOURNAMENT ---")
     models = {
         "OLS": LinearRegression(),
@@ -147,7 +147,7 @@ def run_final_analysis():
     plt.savefig("data_weekly/final_actual_vs_predicted.png")
     print(">> Saved: data_weekly/final_actual_vs_predicted.png")
     
-    res_df.to_csv("data_weekly/final_tracker_results.csv")
+    # res_df.to_csv("data_weekly/final_tracker_results.csv")
 
 if __name__ == "__main__":
     run_final_analysis()
