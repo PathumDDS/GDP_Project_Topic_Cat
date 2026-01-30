@@ -108,7 +108,7 @@ def fetch_window(pytrends, cat_id, start_str, end_str, name):
 
     return pd.DataFrame(index=full_idx, columns=[name]).fillna(0)
 
-# ----------------- 2. Filter Redundant Files (THE FIX) -----------------
+# ----------------- 2. Filter Redundant Files -----------------
 def get_best_files(raw_win_folder):
     """
     Scans the folder and REMOVES subsets.
