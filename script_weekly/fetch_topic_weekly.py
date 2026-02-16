@@ -28,7 +28,7 @@ PROCED = os.path.join(KW_DIR, "processed.txt")
 FAILED = os.path.join(KW_DIR, "failed.txt")
 RUN_LOG = os.path.join(LOGS, "runs.log")
 
-GEO = "LK"
+GEO = "MV"
 TZ = 330
 START_DATE = datetime(2015, 1, 1)
 WINDOW_YEARS = 5
