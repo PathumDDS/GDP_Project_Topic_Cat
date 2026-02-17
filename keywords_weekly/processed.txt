@@ -144,3 +144,21 @@ Birthday
 Crisis
 Economic crisis
 Exportation
+House moving
+House price index
+Interest
+Investment
+Job search
+Loan
+Luggage
+Mortgage
+Office space
+Private employment agency
+Public debt
+Lawyer
+Student loan
+Temporary jobs
+Unemployment
+Unemployment benefits
+Recession
+Recruitment

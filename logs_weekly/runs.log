@@ -903,3 +903,68 @@
 2026-02-16 09:47:51 UTC - Error resolving suggestion for Financial crisis: The request failed: Google returned a response with code 429
 2026-02-16 09:47:51 UTC - --- RESOLVING TOPIC: Foreclosure ---
 2026-02-16 09:47:52 UTC - Error resolving suggestion for Foreclosure: The request failed: Google returned a response with code 429
+2026-02-17 04:00:51 UTC - --- RESOLVING TOPIC: Housing bubble ---
+2026-02-17 04:00:52 UTC - Found MID: /g/11gt__kf44 for Housing bubble
+2026-02-17 04:03:41 UTC - --- RESOLVING TOPIC: House moving ---
+2026-02-17 04:03:42 UTC - Found MID: /g/11j8qrmlgh for House moving
+2026-02-17 04:05:29 UTC - SUCCESS: House moving
+2026-02-17 04:06:36 UTC - --- RESOLVING TOPIC: House price index ---
+2026-02-17 04:06:37 UTC - Found MID: /m/0gn3x3 for House price index
+2026-02-17 04:08:00 UTC - SUCCESS: House price index
+2026-02-17 04:09:54 UTC - --- RESOLVING TOPIC: Interest ---
+2026-02-17 04:09:55 UTC - Found MID: /m/0gtwsq1 for Interest
+2026-02-17 04:11:40 UTC - SUCCESS: Interest
+2026-02-17 04:13:15 UTC - --- RESOLVING TOPIC: Investment ---
+2026-02-17 04:13:16 UTC - Found MID: /g/12bm3rm_7 for Investment
+2026-02-17 04:14:57 UTC - SUCCESS: Investment
+2026-02-17 04:14:57 UTC - No more keywords pending. Stopping immediately.
+2026-02-17 04:22:37 UTC - --- RESOLVING TOPIC: Job ---
+2026-02-17 04:22:38 UTC - Found MID: /g/11f5_qj1qd for Job
+2026-02-17 04:25:19 UTC - --- RESOLVING TOPIC: Job search ---
+2026-02-17 04:25:19 UTC - Found MID: /g/11j8qrgxq2 for Job search
+2026-02-17 04:27:05 UTC - SUCCESS: Job search
+2026-02-17 04:28:16 UTC - --- RESOLVING TOPIC: Judicial Liquidation ---
+2026-02-17 04:28:17 UTC - Found MID: /g/11bwpqb43h for Judicial Liquidation
+2026-02-17 04:31:38 UTC - --- RESOLVING TOPIC: Loan ---
+2026-02-17 04:31:38 UTC - Found MID: /g/121bdfn8 for Loan
+2026-02-17 04:32:49 UTC - SUCCESS: Loan
+2026-02-17 04:34:31 UTC - --- RESOLVING TOPIC: Luggage ---
+2026-02-17 04:34:32 UTC - Found MID: /m/03w7y7 for Luggage
+2026-02-17 04:35:53 UTC - SUCCESS: Luggage
+2026-02-17 04:35:53 UTC - No more keywords pending. Stopping immediately.
+2026-02-17 04:50:10 UTC - --- RESOLVING TOPIC: Mortgage ---
+2026-02-17 04:50:10 UTC - Found MID: /m/0cld96 for Mortgage
+2026-02-17 04:51:58 UTC - SUCCESS: Mortgage
+2026-02-17 04:53:23 UTC - --- RESOLVING TOPIC: Office space ---
+2026-02-17 04:53:23 UTC - Found MID: /g/11fsrbyts_ for Office space
+2026-02-17 04:55:03 UTC - SUCCESS: Office space
+2026-02-17 04:56:55 UTC - --- RESOLVING TOPIC: Private employment agency ---
+2026-02-17 04:56:56 UTC - Found MID: /g/1vhkh1vc for Private employment agency
+2026-02-17 04:58:23 UTC - SUCCESS: Private employment agency
+2026-02-17 04:59:40 UTC - --- RESOLVING TOPIC: Public debt ---
+2026-02-17 04:59:40 UTC - Found MID: /m/01vnp9 for Public debt
+2026-02-17 05:00:55 UTC - SUCCESS: Public debt
+2026-02-17 05:02:34 UTC - --- RESOLVING TOPIC: Lawyer ---
+2026-02-17 05:02:35 UTC - Found MID: /m/04gc2 for Lawyer
+2026-02-17 05:04:32 UTC - SUCCESS: Lawyer
+2026-02-17 05:04:32 UTC - No more keywords pending. Stopping immediately.
+2026-02-17 06:41:11 UTC - --- RESOLVING TOPIC: Student loan ---
+2026-02-17 06:41:11 UTC - Found MID: /m/02crs_ for Student loan
+2026-02-17 06:42:17 UTC - SUCCESS: Student loan
+2026-02-17 06:44:15 UTC - --- RESOLVING TOPIC: Temporary jobs ---
+2026-02-17 06:44:15 UTC - Found MID: /g/11v_8bqnyc for Temporary jobs
+2026-02-17 06:45:40 UTC - SUCCESS: Temporary jobs
+2026-02-17 06:46:56 UTC - --- RESOLVING TOPIC: Unemployment ---
+2026-02-17 06:46:56 UTC - Found MID: /m/07s_c for Unemployment
+2026-02-17 06:48:29 UTC - SUCCESS: Unemployment
+2026-02-17 06:49:29 UTC - --- RESOLVING TOPIC: Unemployment benefits ---
+2026-02-17 06:49:30 UTC - Found MID: /m/0218w7 for Unemployment benefits
+2026-02-17 06:50:55 UTC - SUCCESS: Unemployment benefits
+2026-02-17 06:52:32 UTC - --- RESOLVING TOPIC: Recession ---
+2026-02-17 06:52:33 UTC - Found MID: /m/06bmj for Recession
+2026-02-17 06:54:02 UTC - SUCCESS: Recession
+2026-02-17 06:54:02 UTC - No more keywords pending. Stopping immediately.
+2026-02-17 07:16:52 UTC - --- RESOLVING TOPIC: Recruitment ---
+2026-02-17 07:16:52 UTC - Found MID: /m/03nw7w for Recruitment
+2026-02-17 07:18:24 UTC - SUCCESS: Recruitment
+2026-02-17 07:18:24 UTC - No more keywords pending. Stopping immediately.
