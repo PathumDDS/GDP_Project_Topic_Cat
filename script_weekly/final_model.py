@@ -20,7 +20,7 @@ WEEKLY_TARGET_FILE = "data_weekly/weekly_preprocessed.csv"
 GDP_FILE = "data_weekly/srilanka_gdp_actuals.csv"
 
 def train_and_evaluate_clean(output_name):
-    print(f"--- RUNNING CLEAN MODEL (Reproducing RMSE 2.68) ---")
+    print(f"--- RUNNING CLEAN MODEL ---")
     
     # 1. Load Data
     df = pd.read_csv(INPUT_FILE, index_col=0, parse_dates=True)
