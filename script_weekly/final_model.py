@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import joblib 
+import statsmodels.api as sm
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import LeaveOneOut
 from sklearn.metrics import mean_squared_error, r2_score
@@ -36,6 +37,18 @@ def train_and_evaluate_clean(output_name):
     # This effectively connects 2019-Q4 to 2021-Q1
     X_lagged = X_raw.shift(LAG)
     data = pd.concat([X_lagged, y_raw], axis=1).dropna()
+
+    # 4. Statistical Summary (The "R-style" Summary)
+    # Statsmodels doesn't include an intercept by default, so we add a constant
+    X_summary = sm.add_constant(data[['PC1', 'PC2', 'PC3']])
+    y_summary = data[TARGET_COL]
+    
+    # Fit the OLS model
+    sm_model = sm.OLS(y_summary, X_summary).fit()
+    
+    # This is exactly like summary(model_name) in R
+    print("\n--- STATISTICAL SUMMARY (R-Style) ---")
+    print(sm_model.summary())
     
     # 4. Leave-One-Out Validation
     loo = LeaveOneOut()
