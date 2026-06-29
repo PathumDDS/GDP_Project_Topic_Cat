@@ -85,7 +85,7 @@ def run_tracker():
                 color='black', linewidth=2, marker='D', zorder=5, label='Actual GDP')
     
     plt.axhline(0, color='red', linestyle='--', linewidth=1)
-    plt.title("Sri Lanka Weekly GDP Tracker (Using Pre-Fitted Model)")
+    plt.title("Sri Lanka Weekly GDP Tracker")
     plt.ylabel("YoY GDP Growth (%)")
     plt.legend()
     plt.grid(True, alpha=0.3)
