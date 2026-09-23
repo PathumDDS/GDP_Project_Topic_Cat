@@ -1,14 +1,20 @@
+import os
+import joblib
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
-import os
 
 # --- CONFIGURATION ---
 INPUT_FILE = "data_weekly/weekly_preprocessed_data.csv"
 OUTPUT_FILE = "data_weekly/weekly_pca_scores.csv"
 PLOT_FILE = "data_weekly/weekly_pca_eigenvalues.png"
+
+MODELS_DIR = "models"
+SCALER_FILE = os.path.join(MODELS_DIR, "scaler.pkl")
+PCA_FILE = os.path.join(MODELS_DIR, "pca_model.pkl")
+HOLDOUT_YEAR = 2025 # Everything from this year onward is hidden from the math
 
 def perform_dynamic_pca():
     print("--- STEP 1: Loading Weekly Preprocessed Data ---")
@@ -20,43 +26,35 @@ def perform_dynamic_pca():
     num_variables = df.shape[1]
     print(f"Loaded {num_variables} variables across {df.shape[0]} weeks.")
 
-    print("\n--- STEP 2: Standardization ---")
-    # Standardization is mandatory so the covariance matrix becomes a correlation matrix,
-    # making the explained_variance_ exactly equal to the eigenvalues.
-    scaler = StandardScaler()
-    X_scaled = scaler.fit_transform(df)
+    # --- STRICT DATA LEAKAGE PREVENTION ---
+    # Separate the training timeline from the holdout timeline
+    train_mask = df.index.year < HOLDOUT_YEAR
+    df_train = df[train_mask]
     
-    print("\n--- STEP 3: The Kaiser-Guttman Evaluation ---")
-    # Fit PCA on the entire dataset to calculate all eigenvalues
+    print(f"Restricting Scaler and PCA training strictly to {df_train.index.min().date()} through {df_train.index.max().date()}.")
+
+    print("\n--- STEP 2: Strict Out-of-Sample Standardization ---")
+    scaler = StandardScaler()
+    
+    # FIT ONLY ON TRAINING DATA
+    scaler.fit(df_train)
+    
+    # Transform the full dataset (2025 is transformed using 2016-2024 rules)
+    X_scaled_full = scaler.transform(df) 
+    X_scaled_train = scaler.transform(df_train) # Used for finding eigenvectors
+    
+    print("\n--- STEP 3: The Kaiser-Guttman Evaluation (Training Data Only) ---")
     pca_full = PCA()
-    pca_full.fit(X_scaled)
+    pca_full.fit(X_scaled_train) # FIT ONLY ON TRAINING DATA
     
     eigenvalues = pca_full.explained_variance_
     variance_ratios = pca_full.explained_variance_ratio_
     
-    # Dynamically calculate how many components have an eigenvalue > 1.0
     valid_components = sum(eigenvalues > 1.0)
     
     print(f"Mathematical Threshold: Eigenvalue (λ) > 1.0")
     print(f"Dynamically Retained Components: {valid_components}\n")
     
-    # Print the breakdown to see exactly where the cutoff happens
-    print(f"{'Component':<10} | {'Eigenvalue (λ)':<15} | {'Variance':<10} | {'Status'}")
-    print("-" * 60)
-    
-    # Show the retained components plus a few dropped ones for context
-    display_limit = min(valid_components + 3, len(eigenvalues))
-    for i in range(display_limit):
-        eigen_val = eigenvalues[i]
-        var_pct = variance_ratios[i] * 100
-        status = "[RETAINED]" if eigen_val > 1.0 else "[DROPPED]"
-        print(f"PC{i+1:<8} | λ = {eigen_val:<11.4f} | {var_pct:>5.2f}%    | {status}")
-        
-    total_retained_var = np.sum(variance_ratios[:valid_components]) * 100
-    print("-" * 60)
-    print(f"Cumulative Variance of Retained PCs: {total_retained_var:.2f}%")
-    print("-" * 60)
-
     # Generate the visual justification plot
     plt.figure(figsize=(10, 6))
     max_plot = min(max(valid_components + 5, 10), len(eigenvalues))
@@ -65,7 +63,7 @@ def perform_dynamic_pca():
     plt.axhline(y=1.0, color='r', linestyle='--', label='Kaiser Threshold (λ = 1.0)')
     plt.axvline(x=valid_components, color='g', linestyle=':', label=f'Cutoff: {valid_components} PCs')
     
-    plt.title('Scree Plot: Kaiser-Guttman Criterion for Feature Retention')
+    plt.title('Scree Plot: Kaiser-Guttman Criterion (Strict Training Sample)')
     plt.xlabel('Principal Component')
     plt.ylabel('Eigenvalue (λ)')
     plt.xticks(range(1, max_plot + 1))
@@ -74,20 +72,31 @@ def perform_dynamic_pca():
     plt.savefig(PLOT_FILE)
     print(f"-> Diagnostic plot saved to: {PLOT_FILE}")
 
-    print(f"\n--- STEP 4: Extraction and Saving ---")
-    # Transform the dataset keeping ONLY the dynamically justified components
+    print("\n--- STEP 4: Extraction and Saving ---")
     pca_final = PCA(n_components=valid_components)
-    pca_scores = pca_final.fit_transform(X_scaled)
+    
+    # FIT ONLY ON TRAINING, but TRANSFORM ALL DATA for the final CSV
+    pca_final.fit(X_scaled_train)
+    pca_scores_full = pca_final.transform(X_scaled_full)
     
     df_pca = pd.DataFrame(
-        pca_scores, 
+        pca_scores_full, 
         index=df.index, 
         columns=[f"PC{i+1}" for i in range(valid_components)]
     )
     
     df_pca.to_csv(OUTPUT_FILE)
-    print(f"-> Successfully saved {valid_components} dynamically justified components to: {OUTPUT_FILE}")
-    print("\nNext step: Merge this file with the quarterly GDP data using the alignment script.")
+    print(f"-> Successfully saved {valid_components} leak-free components to: {OUTPUT_FILE}")
+
+    print("\n--- STEP 5: Serializing Preprocessing Pipeline ---")
+    os.makedirs(MODELS_DIR, exist_ok=True)
+    
+    # We dump the strictly fitted models
+    joblib.dump(scaler, SCALER_FILE)
+    joblib.dump(pca_final, PCA_FILE)
+    
+    print(f"-> [SUCCESS] Exported pure historical Scaler rules to: {SCALER_FILE}")
+    print(f"-> [SUCCESS] Exported pure historical PCA matrix to: {PCA_FILE}")
 
 if __name__ == "__main__":
     perform_dynamic_pca()

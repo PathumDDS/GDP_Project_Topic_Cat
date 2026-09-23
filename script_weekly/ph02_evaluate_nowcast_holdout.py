@@ -11,6 +11,7 @@ warnings.filterwarnings("ignore")
 INPUT_FILE = "data_weekly/midas_ready_dataset.csv"
 PLOT_PREDICTIONS = "data_weekly/nowcast_predictions_by_quarter.png"
 PLOT_ERRORS = "data_weekly/nowcast_errors_by_quarter.png"
+WEIGHTS_OUTPUT_FILE = "models/midas_optimized_weights.npy"
 OPTIMAL_PCS = 3  
 HOLDOUT_YEAR = 2025  
 
@@ -58,13 +59,12 @@ def run_comprehensive_evaluation():
     X_train, y_lag_train, d_train, y_train = X_arr[train_mask], y_lag[train_mask], d_target[train_mask], y_target[train_mask]
     X_test, y_lag_test, d_test, y_test = X_arr[test_mask], y_lag[test_mask], d_target[test_mask], y_target[test_mask]
     
-    num_test_quarters = min(3, len(y_test)) # Safely handles if you have 1, 2, or 3 quarters
+    num_test_quarters = min(3, len(y_test))
     
     print(f"\n--- STEP 2: Tracking Predictions & Errors for {HOLDOUT_YEAR} ---")
     target_str = " | ".join([f"Q{i+1}: {y_test[i]:.2f}%" for i in range(num_test_quarters)])
     print(f"Target GDPs -> {target_str}\n")
     
-    # Dictionaries to store results dynamically
     preds_dict = {i: [] for i in range(num_test_quarters)}
     errors_dict = {i: [] for i in range(num_test_quarters)}
     
@@ -86,7 +86,6 @@ def run_comprehensive_evaluation():
             weights = exponential_almon_weights(theta1, theta2, num_weeks)
             preds += gamma * np.sum(X_test[:, :num_weeks, p] * weights, axis=1)
             
-        # Store predictions and absolute errors
         print_str = f"Week {num_weeks:2d} |"
         for i in range(num_test_quarters):
             preds_dict[i].append(preds[i])
@@ -95,9 +94,15 @@ def run_comprehensive_evaluation():
             
         print(print_str)
 
-    # --- STEP 3: GENERATE PREDICTION PLOT ---
+        # --- EXPORT WEIGHTS AT FULL HORIZON (WEEK 13) ---
+        if num_weeks == 13:
+            os.makedirs("models", exist_ok=True)
+            np.save(WEIGHTS_OUTPUT_FILE, opt_params)
+            print(f"\n[SUCCESS] Exported final Week 13 MIDAS weights to '{WEIGHTS_OUTPUT_FILE}'")
+
+    # --- STEP 3: PREDICTION PLOT ---
     fig1, axes1 = plt.subplots(1, num_test_quarters, figsize=(6 * num_test_quarters, 5))
-    if num_test_quarters == 1: axes1 = [axes1] # Ensure iterable if only 1 quarter
+    if num_test_quarters == 1: axes1 = [axes1]
     
     colors = ['#1f77b4', '#ff7f0e', '#2ca02c']
     
@@ -117,7 +122,7 @@ def run_comprehensive_evaluation():
     fig1.savefig(PLOT_PREDICTIONS, dpi=300, bbox_inches='tight')
     plt.close(fig1)
 
-    # --- STEP 4: GENERATE ERROR PLOT ---
+    # --- STEP 4: ERROR PLOT ---
     fig2, axes2 = plt.subplots(1, num_test_quarters, figsize=(6 * num_test_quarters, 5), sharey=True)
     if num_test_quarters == 1: axes2 = [axes2]
     
